@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <h1>Position</h1>
+    <h1>Entry</h1>
   </div>
 </template>
 

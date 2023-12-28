@@ -1,6 +1,17 @@
+<!--suppress CssUnusedSymbol -->
 <script setup lang="ts">
 import {ref, onMounted, onUnmounted} from "vue";
-import {Avatar, Edit, Grid, Histogram, House, InfoFilled, Money, Remove, Search} from "@element-plus/icons-vue";
+import {
+  Avatar, BellFilled,
+  Delete,
+  Edit,
+  Grid,
+  Histogram, HomeFilled,
+  List,
+  Money,
+  Search,
+  StarFilled
+} from "@element-plus/icons-vue";
 
 const menu = ref({height: ''});
 
@@ -42,17 +53,23 @@ onUnmounted(() => {
             </el-icon>
             员工信息
           </el-menu-item>
-          <el-menu-item index="/admin/position">
+          <el-menu-item index="/admin/entry">
             <el-icon>
-              <Remove/>
+              <List/>
             </el-icon>
-            入职离职
+            员工入职
+          </el-menu-item>
+          <el-menu-item index="/admin/dimission">
+            <el-icon>
+              <Delete/>
+            </el-icon>
+            员工离职
           </el-menu-item>
           <el-menu-item index="/admin/salary">
             <el-icon>
               <Money/>
             </el-icon>
-            薪资管理
+            工资管理
           </el-menu-item>
           <el-menu-item index="/admin/analytics">
             <el-icon>
@@ -72,11 +89,23 @@ onUnmounted(() => {
             </el-icon>
             信息修改
           </el-menu-item>
+          <el-menu-item index="/admin/attendance">
+            <el-icon>
+              <BellFilled/>
+            </el-icon>
+            考勤管理
+          </el-menu-item>
+          <el-menu-item index="/admin/train">
+            <el-icon>
+              <StarFilled/>
+            </el-icon>
+            培训管理
+          </el-menu-item>
           <el-menu-item index="/admin/dormitory">
             <el-icon>
-              <House/>
+              <HomeFilled/>
             </el-icon>
-            宿舍调整
+            宿舍管理
           </el-menu-item>
 
         </el-menu>

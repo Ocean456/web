@@ -41,8 +41,20 @@ const router = createRouter({
                     component: () => import('../views/Salary.vue')
                 },
                 {
-                    path: 'position',
-                    component: () => import('../views/Position.vue')
+                    path: 'entry',
+                    component: () => import('../views/Entry.vue')
+                },
+                {
+                    path: 'dimission',
+                    component: () => import('../views/Dimission.vue')
+                },
+                {
+                    path: 'attendance',
+                    component: () => import('../views/Attendance.vue')
+                },
+                {
+                    path : 'train',
+                    component: () => import('../views/Train.vue')
                 }
             ]
         }
