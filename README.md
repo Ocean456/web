@@ -1,18 +1,36 @@
-# Vue 3 + TypeScript + Vite
+## 员工信息管理系统
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+### 需求分析
 
-## Recommended IDE Setup
+1. 注册登录 （分为 管理员和 普通用户）
+2. 管理员：
+    1. 登录 -lmx
+    2. 员工信息（显示） -lmx
+        1. 员工编号
+        2. 员工姓名
+        3. 员工性别
+        4. 员工年龄
+        5. 员工电话
+        6. 员工地址
+        7. 员工部门
+        8. 员工职位
+        9. 员工工资
+        10. 员工入职时间
+        11. 员工离职时间
+        12. 员工紧急联系人电话
+        13. 员工宿舍
+    3. 员工入职与离职 -xsd
+    4. 员工信息分析 -sdy
+    5. 员工信息查询 -sdy
+    6. 员工信息修改 -lmx
+    7. 薪水调整 -xsd
+    8. 员工宿舍调整 -sdy
+3. 普通用户：
+    1. 登录（员工编号，员工编号后六位） -lmx
+    2. 个人信息完善 -xsd
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### 表格
 
-## Type Support For `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+| 员工编号 | 员工姓名 | 员工性别 | 员工年龄 | 员工电话 | 员工地址 | 员工部门 | 员工职位 | 员工工资 | 员工入职时间 | 员工离职时间 | 员工紧急联系人电话 | 员工宿舍 |
+|------|------|------|------|------|------|------|------|------|--------|--------|-----------|------|
+|      |      |      |      |      |      |      |      |      |        |        |           |      |
