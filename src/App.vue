@@ -2,7 +2,9 @@
 </script>
 <template>
   <div id="app">
-    <RouterView/>
+    <transition name="fade" mode="out-in">
+      <router-view/>
+    </transition>
   </div>
 </template>
 <style></style>

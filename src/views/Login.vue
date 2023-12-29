@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import {ElMessage} from "element-plus";
 import router from "../router";
 import {login} from "../axios";
@@ -15,28 +15,24 @@ const handleLogin = () => {
       ElMessage.success("登录成功");
       router.push("/admin");
     } else {
-      ElMessage.error("登录失败");
+      ElMessage.error("账号或密码错误");
     }
   });
 };
 
-onMounted(() => {
-  document.body.style.backgroundImage = 'url("src/assets/wave.svg")'
-});
 </script>
-
 <template>
   <el-container>
     <el-card>
-      <el-form label-width="60">
+      <el-form>
         <el-header>
           <h1>登录</h1>
         </el-header>
-        <el-form-item label="用户名">
-          <el-input v-model="form.username"></el-input>
+        <el-form-item>
+          <el-input placeholder="账号" v-model="form.username"></el-input>
         </el-form-item>
-        <el-form-item label="密码">
-          <el-input @keydown.enter="handleLogin" v-model="form.password"></el-input>
+        <el-form-item>
+          <el-input type="password" placeholder="密码" @keydown.enter="handleLogin" v-model="form.password"></el-input>
         </el-form-item>
         <el-button type="primary" @click="handleLogin">登录</el-button>
       </el-form>
@@ -45,26 +41,39 @@ onMounted(() => {
 </template>
 
 <style scoped>
+
 * {
   user-select: none;
 }
 
 .el-container {
-  height: 80vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 65vw;
-  margin: auto;
+  background-color: #5C8374;
 }
+
 
 .el-header {
   text-align: center;
+
 }
 
 .el-card {
-  width: 400px;
-  margin: 100px auto;
+  width: 50%;
+  height: 100vh;
+  border: 0;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1B4242;
+  color: #9EC8B9;
+}
+
+.el-form {
+  width: 300px;
 }
 
 .el-button {
@@ -73,8 +82,33 @@ onMounted(() => {
   margin-bottom: 20px;
 }
 
-.el-input {
-  width: 300px;
-  margin-right: 20px;
+
+.el-button {
+  background-color: transparent;
+  border-color: #5C8374;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.el-button:hover {
+  background-color: #9EC8B9;
+}
+
+:deep(.el-input__wrapper) {
+  background-color: transparent;
+  box-shadow: none;
+  border-bottom: whitesmoke 1px solid;
+  border-radius: 0;
+  padding: 0;
+  font-size: 18px;
+  height: 40px;
+}
+
+:deep(.el-input__inner) {
+  color: #9EC8B9;
+}
+
+:deep(.el-input__inner[type = "password"]) {
+  letter-spacing: 3px;
 }
 </style>
