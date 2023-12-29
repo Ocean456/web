@@ -11,4 +11,7 @@ export const login = (form: {username: string, password: string}) => {
     return axios.post("/login", form)
 }
 
+export const getEmployees = () => {
+    return axios.get("/employees")
+}
 export default axios

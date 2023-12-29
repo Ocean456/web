@@ -98,7 +98,7 @@ import {
       <el-container>
         <el-header>
           <el-menu :ellipsis="false" mode="horizontal" router>
-            <el-card shadow="never" style="margin-left: 10px;color: #344358">{{ $route.name}}</el-card>
+            <el-card shadow="never" style="margin-left: 0px;color: #344358">{{ $route.name}}</el-card>
             <div class="flex-grow"></div>
             <el-menu-item style="color:#344358;" index="/login">退出登录</el-menu-item>
           </el-menu>
@@ -168,4 +168,5 @@ import {
 :deep(h1){
   margin: 0;
 }
+
 </style>
