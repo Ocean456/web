@@ -3,7 +3,9 @@
 import {
   BellFilled, Compass, Delete, Edit, Grid, Histogram, House, List, Management, Money, Search, Star
 } from "@element-plus/icons-vue";
+import {ref} from "vue";
 
+const dialog = ref(true);
 </script>
 
 <template>

@@ -13,12 +13,14 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
-    <EmployeeTable :tableData="tableData"/>
+  <div id="information">
+    <EmployeeTable  :tableData="tableData"/>
 
   </div>
 </template>
 
 <style scoped>
-
+#information{
+  padding: 20px;
+}
 </style>

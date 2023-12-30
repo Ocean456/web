@@ -14,4 +14,19 @@ export const login = (form: {username: string, password: string}) => {
 export const getEmployees = () => {
     return axios.get("/employees")
 }
+
+export const addEmployee = (employee: any) => {
+    return axios.post('/employee', employee)
+}
+
+
+export const getEmployee = (type: string, parameter: string) => {
+    return axios.get('/employee', {
+        params: {
+            type: type,
+            parameter: parameter
+        }
+    })
+}
+
 export default axios

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { ref, defineProps } from 'vue';
+import EmployeeDialog from "./EmployeeDialog.vue";
+
 const props = defineProps<{
   tableData: {
     employeeID: number
@@ -16,6 +19,14 @@ const props = defineProps<{
     employeeDormitory: string
   }[]
 }>()
+
+const selectedEmployee = ref({});
+const dialogVisible = ref(false);
+
+const openDialog = (row: any) => {
+  selectedEmployee.value = row;
+  dialogVisible.value = true;
+}
 </script>
 
 <template>
@@ -39,6 +50,8 @@ const props = defineProps<{
 <!--    <el-table-column prop="emergencyContactPhone" label="紧急联系电话"></el-table-column>-->
 <!--    <el-table-column prop="dormitory" label="宿舍"></el-table-column>-->
   </el-table>
+  <EmployeeDialog :employee="selectedEmployee" :visible="dialogVisible" @update:visible="dialogVisible = $event"></EmployeeDialog>
+
 </template>
 
 <style scoped>
