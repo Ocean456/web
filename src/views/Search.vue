@@ -16,7 +16,7 @@ const search = () => {
 
 <template>
   <div id="search">
-    <el-input v-model="input" placeholder="请输入内容" clearable>
+    <el-input class="input" v-model="input" placeholder="请输入内容" clearable>
       <template #prepend>
         <el-select v-model="select" placeholder="请选择">
           <el-option label="员工编号" value="employeeID"></el-option>
@@ -46,5 +46,9 @@ const search = () => {
 <style scoped>
 #search {
   padding: 20px;
+}
+
+.input {
+  margin-bottom: 10px;
 }
 </style>
