@@ -29,4 +29,13 @@ export const getEmployee = (type: string, parameter: string) => {
     })
 }
 
+export const getEmployeeByPage = (page: number, size: number) => {
+    return axios.get('/employees/page', {
+        params: {
+            page: page,
+            size: size
+        }
+    })
+}
+
 export default axios
