@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, defineProps} from 'vue';
+import {ref} from 'vue';
 import EmployeeDialog from "./EmployeeDialog.vue";
 
 const props = defineProps<{

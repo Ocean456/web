@@ -3,20 +3,38 @@ import {ref} from "vue";
 import {getEmployee} from "../axios";
 import EmployeeTable from "../components/EmployeeTable.vue";
 
-const select = ref("employeeID");
+const select = ref("employeeName");
 const input = ref('');
 
+const totalData = ref([]);
 const tableData = ref([]);
 const search = () => {
-  getEmployee(select.value, input.value).then((res:any) => {
-    tableData.value = res.data;
+  getEmployee(select.value, input.value).then((res: any) => {
+    totalData.value = res.data;
+    total.value = res.data.length;
+    fetchData();
   });
+};
+
+const currentPage = ref(1);
+const pageSize = ref(15);
+const total = ref(0);
+
+const fetchData = () => {
+  const start = (currentPage.value - 1) * pageSize.value;
+  const end = start + pageSize.value;
+  tableData.value = totalData.value.slice(start, end);
+};
+
+const handleCurrentChange = (val: number) => {
+  currentPage.value = val;
+  fetchData();
 };
 </script>
 
 <template>
   <div id="search">
-    <el-input class="input" v-model="input" placeholder="请输入内容" clearable>
+    <el-input class="input" v-model="input" placeholder="请输入内容" @keydown.enter="search" clearable>
       <template #prepend>
         <el-select v-model="select" placeholder="请选择">
           <el-option label="员工编号" value="employeeID"></el-option>
@@ -40,6 +58,8 @@ const search = () => {
     </el-input>
 
     <EmployeeTable :table-data="tableData"></EmployeeTable>
+    <el-pagination background small :current-page="currentPage" :page-size="pageSize" :total="total" class="p"
+                   layout="prev,pager,next,jumper" @current-change="handleCurrentChange"></el-pagination>
   </div>
 </template>
 
@@ -49,6 +69,11 @@ const search = () => {
 }
 
 .input {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+.p {
+  margin-top: 15px;
+  justify-content: center;
 }
 </style>

@@ -63,9 +63,9 @@ const router = createRouter({
                     component: () => import('../views/Attendance.vue')
                 },
                 {
-                    path: 'train',
+                    path: 'training',
                     name: '培训管理',
-                    component: () => import('../views/Train.vue')
+                    component: () => import('../views/Training.vue')
                 },
                 {
                     path: 'home',
@@ -76,22 +76,7 @@ const router = createRouter({
         },
         {
             path: '/staff',
-            component: () => import('../views/staff/Staff.vue'),
-            redirect: '/staff/home',
-            children: [
-                {
-                    path: 'home',
-                    component: () => import('../views/staff/Home.vue')
-                },
-                {
-                    path: 'prefect',
-                    component: () => import('../views/staff/Prefect.vue')
-                },
-                {
-                    path: 'adjust',
-                    component: () => import('../views/staff/Adjust.vue')
-                }
-            ]
+            component: () => import('../views/Staff.vue'),
         }
     ]
 })

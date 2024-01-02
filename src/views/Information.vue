@@ -12,14 +12,15 @@ onMounted(async () => {
   // const res = await getEmployees()
 
   const res = await getEmployeeByPage(currentPage.value, pageSize.value)
-  tableData.value = res.data
-  total.value = res.total
+  tableData.value = res.data['records']
+  total.value = res.data.total
+  
 })
 
 const fetchData = async () => {
   const res = await getEmployeeByPage(currentPage.value, pageSize.value)
-  tableData.value = res.data
-  total.value = res.total
+  tableData.value = res.data.records
+  total.value = res.data.total
 }
 const handleCurrentChange = async (val: number) => {
   currentPage.value = val
@@ -30,12 +31,16 @@ const handleCurrentChange = async (val: number) => {
 <template>
   <div id="information">
     <EmployeeTable :tableData="tableData"/>
-    <el-pagination total=""></el-pagination>
+    <el-pagination background :current-page="currentPage" :page-size="pageSize" :total="total" class="p" layout="prev,pager,next,jumper" @current-change="handleCurrentChange"></el-pagination>
   </div>
 </template>
 
 <style scoped>
 #information {
   padding: 20px;
+}
+.p{
+  margin-top: 20px;
+  justify-content: center;
 }
 </style>

@@ -29,6 +29,10 @@ export const getEmployee = (type: string, parameter: string) => {
     })
 }
 
+export const getTrainings = () => {
+    return axios.get('/trainings')
+}
+
 export const getEmployeeByPage = (page: number, size: number) => {
     return axios.get('/employees/page', {
         params: {

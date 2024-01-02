@@ -82,7 +82,7 @@ const dialog = ref(true);
             </el-icon>
             考勤管理
           </el-menu-item>
-          <el-menu-item index="/admin/train">
+          <el-menu-item index="/admin/training">
             <el-icon>
               <Star/>
             </el-icon>
