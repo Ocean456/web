@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import {getEmployee} from "../axios";
-
+import {getEmployee, update_date} from "../axios";
+import axios from "axios";
+import {ElMessage} from "element-plus";
+const spring = axios.create({
+  baseURL: 'http://localhost:9090/api'
+})
 
 const parameter = ref('')
 const dimission = ref({
@@ -20,20 +24,35 @@ const dimission = ref({
   employeeResignationDate: '',
 
 })
+
 const search = () => {
-  getEmployee('employeeID', parameter.value).then((res: any) => {
-    dimission.value = res.data[0]
-    console.log(dimission.value)
+  spring.get('/getemployee',{params:{id:parameter.value}}).then(response=>{
+    dimission.value=response.data
   })
 }
-
+const update=()=>{
+  update_date(dimission.value.employeeID,dimission.value.employeeResignationDate);
+  spring.delete('/delet',{params:{username:dimission.value.employeePhone}})
+      .then(response=>{
+        ElMessage({
+          message:"操纵成功",
+          type:"success"
+        })
+      }).catch(error=>{
+    ElMessage({
+      message: error,
+      type: 'warning'
+    })
+  })
+}
 </script>
 
 <template>
   <div class="label">
     <el-form-item label=" 员工号:" style="font-size: large">
       <el-input v-model="parameter" placeholder="请输入员工号" class="id"></el-input>
-      <el-button type="primary" size="default" @click="search">查询</el-button>
+      <el-button v-if="parameter.length>0" type="primary" size="default" @click="search">查询</el-button>
+      <el-button v-if="parameter.length>0" type="primary" size="default" @click="update">确定</el-button>
     </el-form-item>
   </div>
   <div>
@@ -69,13 +88,13 @@ const search = () => {
         <el-input v-model="dimission.employeeHireDate"></el-input>
       </el-form-item>
       <el-form-item label="离职时间">
-        <el-input v-model="dimission.employeeResignationDate"></el-input>
+        <el-date-picker v-model="dimission.employeeResignationDate" style="width: 100%;" format="YYYY/MM/DD" value-format="YYYY-MM-DD" ></el-date-picker>
       </el-form-item>
       <el-form-item label="薪水">
         <el-input v-model="dimission.employeeSalary"></el-input>
       </el-form-item>
       <el-form-item label="宿舍号">
-        <el-input v-model="dimission.employeeDormitory"></el-input>
+        <el-input  v-model="dimission.employeeDormitory"></el-input>
       </el-form-item>
 
     </el-form>

@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+
+
 axios.defaults.baseURL = 'http://localhost:9090/api'
 
 // Add a request interceptor
@@ -7,13 +9,18 @@ axios.defaults.baseURL = 'http://localhost:9090/api'
 
 // Add a response interceptor
 
-export const login = (form: {username: string, password: string}) => {
+export const login = (form: { username: string, password: string }) => {
     return axios.post("/login", form)
 }
 
 export const getEmployees = () => {
     return axios.get("/employees")
 }
+
+export const getApplications = () => {
+    return axios.get("/applications")
+}
+
 
 export const addEmployee = (employee: any) => {
     return axios.post('/employee', employee)
@@ -42,4 +49,7 @@ export const getEmployeeByPage = (page: number, size: number) => {
     })
 }
 
+export const updateApplication = (application: any) => {
+    return axios.put('/application', application)
+}
 export default axios

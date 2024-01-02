@@ -3,9 +3,16 @@
 import {
   BellFilled, Compass, Delete, Edit, Grid, Histogram, House, List, Management, Money, Search, Star
 } from "@element-plus/icons-vue";
-import {ref} from "vue";
 
-const dialog = ref(true);
+import {useUserStore} from "../store";
+import router from "../router";
+
+const userStore = useUserStore();
+
+const handleLogout = () => {
+  userStore.logout();
+  router.push('/login');
+}
 </script>
 
 <template>
@@ -100,9 +107,9 @@ const dialog = ref(true);
       <el-container>
         <el-header>
           <el-menu :ellipsis="false" mode="horizontal" router>
-            <el-card shadow="never" style="margin-left: 0px;color: #344358">{{ $route.name}}</el-card>
+            <el-card shadow="never" style="margin-left: 0px;color: #344358">{{ $route.name }}</el-card>
             <div class="flex-grow"></div>
-            <el-menu-item style="color:#344358;" index="/login">退出登录</el-menu-item>
+            <el-menu-item style="color:#344358;" @click="handleLogout">退出登录</el-menu-item>
           </el-menu>
         </el-header>
         <el-main>
@@ -160,15 +167,25 @@ const dialog = ref(true);
 * {
   user-select: none;
 }
-:deep(.el-sub-menu__title:hover){
+
+:deep(.el-sub-menu__title:hover) {
   background-color: #2f3f52;
 }
+
 .el-main {
   padding: 0;
 }
 
-:deep(h1){
+:deep(h1) {
   margin: 0;
 }
 
+/*el-sub-menu -> el-menu-item*/
+:deep(.el-sub-menu .el-menu-item) {
+  background-color: #212f3f;
+}
+
+:deep(.el-sub-menu .el-menu-item:hover) {
+  background-color: #02172a;
+}
 </style>

@@ -33,7 +33,7 @@ const display = ref('staff')
 
 .card {
   width: 70vw;
-  height: 70vh;
+  height: 60vh;
 }
 
 </style>

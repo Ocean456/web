@@ -15,11 +15,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="training">
     <TrainingTable :tableData="tableData"/>
   </div>
 </template>
 
 <style scoped>
-
+.training{
+  padding: 20px;
+}
 </style>

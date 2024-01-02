@@ -8,16 +8,16 @@ import vue from '@vitejs/plugin-vue'
 // const __dirname = dirname(__filename);
 
 export default defineConfig({
-  plugins: [vue()],
-/*  server: {
-    open: true,
-    https: {
-      key: fs.readFileSync(resolve(__dirname, 'cert.key')),
-      cert: fs.readFileSync(resolve(__dirname, 'cert.crt'))
+    plugins: [vue()],
+    /*  server: {
+        open: true,
+        https: {
+          key: fs.readFileSync(resolve(__dirname, 'cert.key')),
+          cert: fs.readFileSync(resolve(__dirname, 'cert.crt'))
+        }
+      },*/
+    optimizeDeps: {
+        exclude: ['BMap']
     }
-  }*/
-  optimizeDeps: {
-    exclude: ['BMap']
-  }
 })
 

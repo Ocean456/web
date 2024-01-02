@@ -3,17 +3,30 @@ import {ref} from "vue";
 import {ElMessage} from "element-plus";
 import router from "../router";
 import {login} from "../axios";
+import {useUserStore} from "../store";
 
 const form = ref({
   username: "",
   password: "",
 });
 
+const userStore = useUserStore();
+
+
 const handleLogin = () => {
+  if (form.value.username === "" || form.value.password === "" || form.value.username.length !== 11 || form.value.password.length < 6) {
+    ElMessage.warning("请输入正确的账号密码");
+    return;
+  }
   login(form.value).then((res: any) => {
     if (res.status === 200) {
       ElMessage.success("登录成功");
-      router.push("/admin");
+      userStore.login(res.data.username, res.data.role)
+      if (res.data.role === "ADMIN") {
+        router.push("/admin");
+      } else {
+        router.push("/staff");
+      }
     } else {
       ElMessage.error("账号或密码错误");
     }

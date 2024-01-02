@@ -1,7 +1,10 @@
 <script lang="ts" setup>
-import {ref} from "vue";
-import {addEmployee} from "../axios";
+import {onMounted, ref} from "vue";
+import axios from "axios";
 import {ElMessage} from "element-plus";
+const spring = axios.create({
+  baseURL: 'http://localhost:9090/api'
+})
 
 
 const addition = ref({
@@ -14,20 +17,56 @@ const addition = ref({
   employeeDepartment: '',
   employeePosition: '',
   employeeSalary: '',
-  employeeHireDate: null,
-  employeeResignationDate: null,
-  employeeEmergencyContactPhone: '',
   employeeDormitory: ''
 })
 
-const submit = () => {
-  addEmployee(addition.value)
-      .then(() =>
-          ElMessage.success('添加成功')
-      ).catch((error: any) => {
-    ElMessage.error(error)
-  });
+const User=ref({
+  username:'',
+  password:'000000',
+  role:'USER'
+})
+
+const getting=()=>{
+  spring.get('/getcount').then(response=>{
+    addition.value.employeeID=response.data+1
+  })
 }
+
+const submit = () => {
+  spring.post('/employee',addition.value)
+      .then((response) =>{
+        ElMessage({
+          message:'操作成功',
+          type:"success"
+        })
+      }).catch(error=> {
+    ElMessage({
+      message: error,
+      type: 'warning'
+    })
+  })
+  User.value.username=addition.value.employeePhone;
+  spring.post('/insert',User.value)
+      .then(response=>{
+        ElMessage({
+          message:'操作成功',
+          type:"success"
+        })
+      }).catch(error=>{
+    ElMessage({
+      message: error,
+      type: 'warning'
+    })
+  })
+}
+const reset=()=>{
+  location.reload()
+}
+onMounted(()=>{
+  getting()
+})
+
+
 </script>
 
 <template>
@@ -63,7 +102,7 @@ const submit = () => {
     <el-card class="card identity" shadow="hover">
       <el-form :model="addition" label-width="80px">
         <el-form-item label="员工号">
-          <el-input v-model="addition.employeeID" placeholder="请输入员工号"></el-input>
+          <el-input v-model="addition.employeeID" placeholder="请输入员工号" disabled></el-input>
         </el-form-item>
         <el-form-item label="宿舍号">
           <el-input v-model="addition.employeeDormitory" placeholder="请输入宿舍号"></el-input>
@@ -74,6 +113,7 @@ const submit = () => {
       </el-form>
     </el-card>
     <el-button type="primary"  @click="submit">提交</el-button>
+    <el-button type="primary"  @click="reset">重置</el-button>
   </div>
 </template>
 
