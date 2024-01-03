@@ -3,6 +3,7 @@ import {ref} from "vue";
 import {getEmployee, setDimission} from "../axios";
 import axios from "axios";
 import {ElMessage} from "element-plus";
+
 const spring = axios.create({
   baseURL: 'http://localhost:9090/api'
 })
@@ -26,19 +27,19 @@ const dimission = ref({
 })
 
 const search = () => {
-  spring.get('/getemployee',{params:{id:parameter.value}}).then(response=>{
-    dimission.value=response.data
+  getEmployee('employeeID', parameter.value).then((res) => {
+    dimission.value = res.data[0];
   })
 }
-const update=()=>{
-  update_date(dimission.value.employeeID,dimission.value.employeeResignationDate);
-  spring.delete('/delet',{params:{username:dimission.value.employeePhone}})
-      .then(response=>{
+const update = () => {
+  setDimission(dimission.value);
+  spring.delete('/delete', {params: {username: dimission.value.employeePhone}})
+      .then(() => {
         ElMessage({
-          message:"操纵成功",
-          type:"success"
+          message: "操纵成功",
+          type: "success"
         })
-      }).catch(error=>{
+      }).catch(error => {
     ElMessage({
       message: error,
       type: 'warning'
@@ -88,13 +89,14 @@ const update=()=>{
         <el-input v-model="dimission.employeeHireDate"></el-input>
       </el-form-item>
       <el-form-item label="离职时间">
-        <el-date-picker v-model="dimission.employeeResignationDate" style="width: 100%;" format="YYYY/MM/DD" value-format="YYYY-MM-DD" ></el-date-picker>
+        <el-date-picker v-model="dimission.employeeResignationDate" style="width: 100%;" format="YYYY/MM/DD"
+                        value-format="YYYY-MM-DD"></el-date-picker>
       </el-form-item>
       <el-form-item label="薪水">
         <el-input v-model="dimission.employeeSalary"></el-input>
       </el-form-item>
       <el-form-item label="宿舍号">
-        <el-input  v-model="dimission.employeeDormitory"></el-input>
+        <el-input v-model="dimission.employeeDormitory"></el-input>
       </el-form-item>
 
     </el-form>

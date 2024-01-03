@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="analytics">
     <div>
       <el-button @click="showAgeChart">年龄比例查看</el-button>
       <el-button @click="showDepartmentChart">部门比例查看</el-button>
@@ -187,4 +187,7 @@ export default {
 </script>
 
 <style scoped>
+.analytics{
+  padding: 20px;
+}
 </style>

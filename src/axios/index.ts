@@ -60,4 +60,24 @@ export const setDimission = (employee: any) => {
 export const updateEmployee = (employee: any) => {
     return axios.put('/employee', employee)
 }
+export const deleteTraining = ( trainingId: number) => {
+    return axios.delete('/training', {
+        params: {
+            trainingId: trainingId
+        }
+    })
+}
+
+export const addTraining = (training: any) => {
+    return axios.post('/training', training)
+}
+
+
+export const  getAttendanceByEmployeeId = (employeeId: number) => {
+    return axios.get('/attendance', {
+        params: {
+            employeeId: employeeId
+        }
+    })
+}
 export default axios
