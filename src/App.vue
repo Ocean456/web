@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {reactive} from "vue";
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+import zhCn from 'element-plus/es/locale//lang/zh-cn.mjs';
 
 const locale = zhCn
 

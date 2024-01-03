@@ -5,7 +5,7 @@ import {getEmployeeByPage} from "../axios";
 
 const tableData = ref([])
 const currentPage = ref(1)
-const pageSize = ref(15)
+const pageSize = ref(20)
 const total = ref(0)
 
 onMounted(async () => {

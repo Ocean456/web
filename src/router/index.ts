@@ -1,4 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
+import {useUserStore} from "../store";
+import {ElMessage} from "element-plus";
 
 const routerHistory = createWebHistory()
 const router = createRouter({
@@ -6,11 +8,13 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            redirect: '/login'
+            redirect: '/login',
+            meta: {requiresAuth: false}
         },
         {
             path: '/login',
-            component: () => import('../views/Login.vue')
+            component: () => import('../views/Login.vue'),
+            meta: {requiresAuth: false}
         },
         {
             path: '/admin',
@@ -20,68 +24,96 @@ const router = createRouter({
                 {
                     path: 'info',
                     name: '员工信息',
-                    component: () => import('../views/Information.vue')
+                    component: () => import('../views/Information.vue'),
+                    meta: {requiresAuth: true}
                 },
                 {
                     path: 'analytics',
                     name: '统计分析',
-                    component: () => import('../views/Analytics.vue')
+                    component: () => import('../views/Analytics.vue'),
+                    meta: {requiresAuth: true}
                 },
                 {
                     path: 'dormitory',
                     name: '宿舍管理',
-                    component: () => import('../views/Dormitory.vue')
+                    component: () => import('../views/Dormitory.vue'),
+                    meta: {requiresAuth: true}
+
                 },
                 {
                     path: 'modify',
                     name: '信息修改',
-                    component: () => import('../views/Modify.vue')
+                    component: () => import('../views/Modify.vue'),
+                    meta: {requiresAuth: true}
+
                 },
                 {
                     path: 'search',
                     name: '信息查询',
-                    component: () => import('../views/Search.vue')
+                    component: () => import('../views/Search.vue'),
+                    meta: {requiresAuth: true}
                 },
                 {
                     path: 'salary',
                     name: '工资管理',
-                    component: () => import('../views/Salary.vue')
+                    component: () => import('../views/Salary.vue'),
+                    meta: {requiresAuth: true}
                 },
                 {
                     path: 'entry',
                     name: '员工入职',
-                    component: () => import('../views/Entry.vue')
+                    component: () => import('../views/Entry.vue'),
+                    meta: {requiresAuth: true}
                 },
                 {
                     path: 'dimission',
                     name: '员工离职',
-                    component: () => import('../views/Dimission.vue')
+                    component: () => import('../views/Dimission.vue'),
+                    meta: {requiresAuth: true}
                 },
                 {
                     path: 'attendance',
                     name: '考勤管理',
-                    component: () => import('../views/Attendance.vue')
+                    component: () => import('../views/Attendance.vue'),
+                    meta: {requiresAuth: true}
                 },
                 {
                     path: 'training',
                     name: '培训管理',
-                    component: () => import('../views/Training.vue')
+                    component: () => import('../views/Training.vue'),
+                    meta: {requiresAuth: true}
                 },
                 {
                     path: 'home',
                     name: '首页',
-                    component: () => import('../views/Home.vue')
+                    component: () => import('../views/Home.vue'),
+                    meta: {requiresAuth: true}
                 }
             ]
         },
         {
             path: '/staff',
             component: () => import('../views/Staff.vue'),
+            meta: {requiresAuth: true}
         }
     ]
 })
 
 
-
+router.beforeEach((to, from, next) => {
+    const store = useUserStore();
+    if (to.meta.requiresAuth && !store.isLoggedIn && to.path !== '/login') {
+        ElMessage.warning('请先登录');
+        next('/login');
+    } else if (store.type === 'USER' && to.path.startsWith('/admin')) {
+        // ElMessage.warning('您无权访问此页面');
+        next(from.path);
+    } else if (store.type === 'ADMIN' && to.path === '/staff') {
+        // ElMessage.warning('您无权访问此页面');
+        next(from.path);
+    } else {
+        next();
+    }
+});
 
 export default router

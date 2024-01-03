@@ -52,4 +52,12 @@ export const getEmployeeByPage = (page: number, size: number) => {
 export const updateApplication = (application: any) => {
     return axios.put('/application', application)
 }
+
+export const setDimission = (employee: any) => {
+    return axios.put('/employee', employee)
+}
+
+export const updateEmployee = (employee: any) => {
+    return axios.put('/employee', employee)
+}
 export default axios

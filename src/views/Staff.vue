@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import {ref} from "vue";
-import StaffInfo from "../components/staff/StaffInfo.vue";
+import StaffInfo from "../components/staff/Info.vue";
+import Setting from "../components/staff/Setting.vue";
 
 const display = ref('staff')
 </script>
@@ -16,7 +17,9 @@ const display = ref('staff')
         <el-tab-pane label="宿舍更换" name="dorm"></el-tab-pane>
         <el-tab-pane label="考勤签到" name="check"></el-tab-pane>
 <!--        <el-tab-pane label="请假申请" name="leave"></el-tab-pane>-->
-        <el-tab-pane label="系统设置" name="setting"></el-tab-pane>
+        <el-tab-pane label="系统设置" name="setting">
+          <Setting/>
+        </el-tab-pane>
       </el-tabs>
     </el-card>
   </div>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {ElMessage} from "element-plus";
 import router from "../router";
 import {login} from "../axios";
@@ -12,6 +12,7 @@ const form = ref({
 
 const userStore = useUserStore();
 
+const cardWidth = ref('50%');
 
 const handleLogin = () => {
   if (form.value.username === "" || form.value.password === "" || form.value.username.length !== 11 || form.value.password.length < 6) {
@@ -21,7 +22,7 @@ const handleLogin = () => {
   login(form.value).then((res: any) => {
     if (res.status === 200) {
       ElMessage.success("登录成功");
-      userStore.login(res.data.username, res.data.role)
+      userStore.login(res.data.username, res.data.role);
       if (res.data.role === "ADMIN") {
         router.push("/admin");
       } else {
@@ -33,10 +34,25 @@ const handleLogin = () => {
   });
 };
 
+onMounted(() => {
+  const adjustCardWidth = () => {
+    if (window.innerWidth > 1200) {
+      cardWidth.value = '50%';
+    } else if (window.innerWidth > 800) {
+      cardWidth.value = '70%';
+    } else {
+      cardWidth.value = '100%';
+    }
+  };
+
+  window.addEventListener('resize', adjustCardWidth);
+  adjustCardWidth();
+});
+
 </script>
 <template>
   <el-container>
-    <el-card>
+    <el-card :style="{width:cardWidth}">
       <el-form>
         <el-header>
           <h1>登录</h1>
@@ -74,7 +90,6 @@ const handleLogin = () => {
 }
 
 .el-card {
-  width: 50%;
   height: 100vh;
   border: 0;
   margin-left: auto;

@@ -25,11 +25,12 @@ const loadData = () => {
 }
 
 const updateStatus = (row: any, status: number) => {
-  updateApplication({applicationId: row.applicationId, applicationStatus: status}).then((res) => {
-    if (res.data === 1) {
-      row.applicationStatus = status;
+  // applicationId -> integer, applicationStatus -> integer
+  updateApplication({applicationId: row.applicationId, applicationStatus: status}).then(() => {
+    getApplications().then((res) => {
+      totalData.value = res.data;
       loadData();
-    }
+    })
   })
 }
 
@@ -51,7 +52,7 @@ onMounted(() => {
         <el-checkbox label="未处理" name="type"></el-checkbox>
       </el-checkbox-group>
     </div>
-    <el-table :data="presentData" border stripe>
+    <el-table :data="presentData"  stripe>
       <el-table-column label="员工号" prop="employeeId"></el-table-column>
       <el-table-column label="姓名" prop="employeeName"></el-table-column>
       <el-table-column label="原宿舍号" prop="formerDormitory"></el-table-column>

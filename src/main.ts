@@ -6,6 +6,7 @@ import './style.css'
 import router from './router'
 import VueAmap, {initAMapApiLoader} from "@vuemap/vue-amap";
 import { createPinia } from 'pinia'
+import VueApexCharts from "vue3-apexcharts";
 import '@vuemap/vue-amap/dist/style.css'
 initAMapApiLoader({
     key:'d1316c0d2d883a7a6906bd044ddab649',
@@ -14,7 +15,8 @@ initAMapApiLoader({
 const pinia = createPinia()
 createApp(App)
     .use(ElementPlus)
-    .use(router)
     .use(pinia)
+    .use(router)
     .use(VueAmap)
+    .use(VueApexCharts)
     .mount('#app')

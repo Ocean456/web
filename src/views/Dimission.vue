@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import {getEmployee, update_date} from "../axios";
+import {getEmployee, setDimission} from "../axios";
 import axios from "axios";
 import {ElMessage} from "element-plus";
 const spring = axios.create({
