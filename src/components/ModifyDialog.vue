@@ -36,7 +36,7 @@ const handleClose = () => {
 
 const handleSave = () => {
   updateEmployee(props.employee).then((response) => {
-    if (response.status=== 200) {
+    if (response.status === 200) {
       emit("update:visible", false);
     } else {
       ElMessage.error("修改失败");
@@ -78,18 +78,18 @@ const handleSave = () => {
       <el-form-item label="底薪">
         <el-input v-model="props.employee.employeeSalary"></el-input>
       </el-form-item>-->
-<!--      <el-form-item label="入职日期">
-        <el-input v-model="props.employee.employeeHireDate"></el-input>
-      </el-form-item>-->
-<!--      <el-form-item label="离职日期">
-        <el-input v-model="props.employee.employeeResignationDate"></el-input>
-      </el-form-item>-->
+      <!--      <el-form-item label="入职日期">
+              <el-input v-model="props.employee.employeeHireDate"></el-input>
+            </el-form-item>-->
+      <!--      <el-form-item label="离职日期">
+              <el-input v-model="props.employee.employeeResignationDate"></el-input>
+            </el-form-item>-->
       <el-form-item label="紧急联系电话">
         <el-input v-model="props.employee.employeeEmergencyContactPhone"></el-input>
       </el-form-item>
-<!--      <el-form-item label="宿舍号">
-        <el-input v-model="props.employee.employeeDormitory"></el-input>
-      </el-form-item>-->
+      <!--      <el-form-item label="宿舍号">
+              <el-input v-model="props.employee.employeeDormitory"></el-input>
+            </el-form-item>-->
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="handleClose">取 消</el-button>

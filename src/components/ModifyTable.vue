@@ -57,7 +57,8 @@ const openDialog = (row: any) => {
       </template>
     </el-table-column>
   </el-table>
-  <ModifyDialog :employee="selectedEmployee" :visible="dialogVisible" @update:visible="dialogVisible = $event"></ModifyDialog>
+  <ModifyDialog :employee="selectedEmployee" :visible="dialogVisible"
+                @update:visible="dialogVisible = $event"></ModifyDialog>
 
 </template>
 

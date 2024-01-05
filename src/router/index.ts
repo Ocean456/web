@@ -100,17 +100,13 @@ const router = createRouter({
 })
 
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
     const store = useUserStore();
     if (to.meta.requiresAuth && !store.isLoggedIn && to.path !== '/login') {
         ElMessage.warning('请先登录');
         next('/login');
-    } else if (store.type === 'USER' && to.path.startsWith('/admin')) {
-        // ElMessage.warning('您无权访问此页面');
-        next(from.path);
-    } else if (store.type === 'ADMIN' && to.path === '/staff') {
-        // ElMessage.warning('您无权访问此页面');
-        next(from.path);
+/*    } else if (store.type === 'USER' && to.path.startsWith('/admin')) {
+        next('/staff')*/
     } else {
         next();
     }

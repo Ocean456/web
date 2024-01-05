@@ -5,6 +5,7 @@ import 'element-plus/dist/index.css'
 import './style.css'
 import router from './router'
 import VueAmap, {initAMapApiLoader} from "@vuemap/vue-amap";
+import '@vuemap/vue-amap/dist/style.css'
 import { createPinia } from 'pinia'
 import VueApexCharts from "vue3-apexcharts";
 import '@vuemap/vue-amap/dist/style.css'

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import TrainingTable from "../components/TrainingTable.vue";
 import {onMounted, ref} from "vue";
-import {getTrainings,addTraining} from "../axios";
+import {getTrainings, addTraining} from "../axios";
+import {ElMessage} from "element-plus";
 
 const tableData = ref([])
 
@@ -13,12 +14,10 @@ onMounted(() => {
 })
 const dialogVisible = ref(false)
 const addition = ref({
-  trainingID: 0,
   trainingName: '',
   employeeID: '',
   trainingStartDate: '',
   trainingEndDate: ''
-
 })
 
 const add = () => {
@@ -27,13 +26,15 @@ const add = () => {
 
 const submit = () => {
   dialogVisible.value = false
+
   addTraining(addition.value).then(() => {
     getTrainings().then((res: any) => {
       tableData.value = res.data
+      ElMessage.success('添加成功')
     })
   }).catch(() => {
-    console.log('添加失败')
-  } )
+    ElMessage.error('添加失败')
+  })
 }
 </script>
 
@@ -50,10 +51,22 @@ const submit = () => {
           <el-input v-model="addition.employeeID"></el-input>
         </el-form-item>
         <el-form-item label="培训开始时间">
-          <el-input v-model="addition.trainingStartDate"></el-input>
+          <el-date-picker
+              style="width: 100%"
+              v-model="addition.trainingStartDate"
+              value-format="YYYY-MM-DD"
+              type="Date"
+              placeholder="选择日期">
+          </el-date-picker>
         </el-form-item>
         <el-form-item label="培训结束时间">
-          <el-input v-model="addition.trainingEndDate"></el-input>
+          <el-date-picker
+              style="width: 100%"
+              v-model="addition.trainingEndDate"
+              value-format="YYYY-MM-DD"
+              type="Date"
+              placeholder="选择日期">
+          </el-date-picker>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">

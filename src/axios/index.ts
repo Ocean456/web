@@ -4,10 +4,6 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:9090/api'
 
-// Add a request interceptor
-
-
-// Add a response interceptor
 
 export const login = (form: { username: string, password: string }) => {
     return axios.post("/login", form)
@@ -34,6 +30,10 @@ export const getEmployee = (type: string, parameter: string) => {
             parameter: parameter
         }
     })
+}
+
+export const getEmployeeCount = () => {
+    return axios.get('/employees/count')
 }
 
 export const getTrainings = () => {
@@ -80,4 +80,48 @@ export const  getAttendanceByEmployeeId = (employeeId: number) => {
         }
     })
 }
+
+export const getSalary = () => {
+    return axios.get('/salary')
+}
+
+export const getAttendanceConfig = () => {
+    return axios.get('/config/attendance')
+}
+
+export const updateAttendanceConfig = (config: any) => {
+    return axios.put('/config/attendance', config)
+}
+
+export const get_salary=(id:number,month:string)=>{
+    return axios.get('/search',{
+        params:{
+            id:id,
+            month:month
+        }
+    })
+}
+export const get_salary1=(id:number)=>{
+    return axios.get('/search1',{
+        params:{
+            id:id
+        }
+    })
+}
+export const get_salary2=(month:string)=>{
+    return axios.get('/search2',{
+        params:{
+            month:month
+        }
+    })
+}
+
+export const deleteApplication=(applicationId:number)=>{
+    return axios.delete('/application',{
+        params: {
+            applicationId: applicationId
+        }
+    })
+}
+
 export default axios

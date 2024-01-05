@@ -7,7 +7,7 @@ const presentData = ref([]);
 const totalData = ref([]);
 const parameter = ref('')
 const currentPage = ref(1);
-const pageSize = ref(20);
+const pageSize = ref(18);
 const total = ref(0);
 
 const search = () => {
@@ -40,7 +40,7 @@ onMounted(() => {
 <template>
   <div class="modify">
     <!--    <h1>Modify</h1>-->
-    <el-input v-model="parameter" placeholder="请输入员工号" class="id" style="margin-bottom: 10px">
+    <el-input v-model="parameter" @keydown.enter="search" placeholder="请输入员工号" class="id" style="margin-bottom: 10px">
       <template #append>
         <el-button type="primary" @click="search">搜索</el-button>
       </template>

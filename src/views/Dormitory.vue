@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import {onMounted} from 'vue';
-import {getApplications, updateApplication} from "../axios";
+import {getApplications, updateApplication,deleteApplication} from "../axios";
+import {ElMessage} from "element-plus";
 
 type Application = {
   applicationId: number,
@@ -29,11 +30,25 @@ const updateStatus = (row: any, status: number) => {
   updateApplication({applicationId: row.applicationId, applicationStatus: status}).then(() => {
     getApplications().then((res) => {
       totalData.value = res.data;
+      ElMessage.success('修改成功')
       loadData();
+    }).catch(() => {
+      ElMessage.error('修改失败')
     })
   })
 }
 
+const deleteApplicationById = (row: any) => {
+  deleteApplication(row.applicationId).then(() => {
+    getApplications().then((res) => {
+      totalData.value = res.data;
+      ElMessage.success('删除成功')
+      loadData();
+    }).catch(() => {
+      ElMessage.error('删除失败')
+    })
+  })
+}
 
 onMounted(() => {
   getApplications().then((res) => {
@@ -52,7 +67,7 @@ onMounted(() => {
         <el-checkbox label="未处理" name="type"></el-checkbox>
       </el-checkbox-group>
     </div>
-    <el-table :data="presentData"  stripe>
+    <el-table :data="presentData" stripe>
       <el-table-column label="员工号" prop="employeeId"></el-table-column>
       <el-table-column label="姓名" prop="employeeName"></el-table-column>
       <el-table-column label="原宿舍号" prop="formerDormitory"></el-table-column>
@@ -65,13 +80,16 @@ onMounted(() => {
           <el-text v-if="scope.row.applicationStatus===2" size="small" type="danger">已拒绝</el-text>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="操作" prop="status" width="150">
+      <el-table-column align="center" label="操作" prop="status" width="210">
         <template #default="scope">
           <el-button v-if="scope.row.applicationStatus===0" size="small" type="primary"
                      @click="updateStatus(scope.row, 1)">确认
           </el-button>
           <el-button v-if="scope.row.applicationStatus===0" size="small" type="danger"
                      @click="updateStatus(scope.row, 2)">拒绝
+          </el-button>
+          <el-button size="small" type="danger"
+                     @click="deleteApplicationById(scope.row)">删除
           </el-button>
         </template>
       </el-table-column>

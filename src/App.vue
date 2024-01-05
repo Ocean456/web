@@ -12,7 +12,7 @@ const config = reactive({
   <div id="app">
     <el-config-provider :message="config" :locale="locale">
       <router-view v-slot="{ Component }">
-        <transition>
+        <transition name="fade">
           <component :is="Component"/>
         </transition>
       </router-view>
@@ -20,4 +20,11 @@ const config = reactive({
 
   </div>
 </template>
-<style></style>
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter , .fade-leave-to {
+  opacity: 0;
+}
+</style>

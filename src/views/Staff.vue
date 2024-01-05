@@ -2,6 +2,11 @@
 import {ref} from "vue";
 import StaffInfo from "../components/staff/Info.vue";
 import Setting from "../components/staff/Setting.vue";
+// import Check from "../components/staff/Check.vue";
+import DormChange from "../components/staff/DormChange.vue";
+
+
+// const loadConfig
 
 const display = ref('staff')
 </script>
@@ -13,11 +18,13 @@ const display = ref('staff')
         <el-tab-pane label="个人信息" name="staff">
           <StaffInfo/>
         </el-tab-pane>
-        <el-tab-pane label="信息完善" name="perfect"></el-tab-pane>
-        <el-tab-pane label="宿舍更换" name="dorm"></el-tab-pane>
-        <el-tab-pane label="考勤签到" name="check"></el-tab-pane>
-<!--        <el-tab-pane label="请假申请" name="leave"></el-tab-pane>-->
-        <el-tab-pane label="系统设置" name="setting">
+        <el-tab-pane label="宿舍更换" name="dorm" lazy>
+          <DormChange/>
+        </el-tab-pane>
+<!--        <el-tab-pane label="考勤签到" name="check" lazy>
+          <Check/>
+        </el-tab-pane>-->
+        <el-tab-pane label="系统设置" name="setting" lazy>
           <Setting/>
         </el-tab-pane>
       </el-tabs>
@@ -36,7 +43,8 @@ const display = ref('staff')
 
 .card {
   width: 70vw;
-  height: 60vh;
+  height: 70vh;
 }
+
 
 </style>

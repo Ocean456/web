@@ -1,10 +1,7 @@
 <script lang="ts" setup>
 import {onMounted, ref} from "vue";
-import axios from "axios";
+import {getEmployeeCount , addEmployee} from '../axios'
 import {ElMessage} from "element-plus";
-const spring = axios.create({
-  baseURL: 'http://localhost:9090/api'
-})
 
 
 const addition = ref({
@@ -20,59 +17,46 @@ const addition = ref({
   employeeDormitory: ''
 })
 
-const User=ref({
-  username:'',
-  password:'000000',
-  role:'USER'
-})
 
-const getting=()=>{
-  spring.get('/getcount').then(response=>{
-    addition.value.employeeID=response.data+1
+const getCount = () => {
+  getEmployeeCount().then((res) => {
+    addition.value.employeeID = res.data + 1
   })
 }
 
 const submit = () => {
-  spring.post('/employee',addition.value)
-      .then((response) =>{
-        ElMessage({
-          message:'操作成功',
-          type:"success"
-        })
-      }).catch(error=> {
-    ElMessage({
-      message: error,
-      type: 'warning'
-    })
-  })
-  User.value.username=addition.value.employeePhone;
-  spring.post('/insert',User.value)
-      .then(response=>{
-        ElMessage({
-          message:'操作成功',
-          type:"success"
-        })
-      }).catch(error=>{
-    ElMessage({
-      message: error,
-      type: 'warning'
-    })
+  addEmployee(addition.value).then((res) => {
+    if (res.status === 200) {
+      getCount()
+      reset()
+      ElMessage.success('添加成功')
+    } else {
+      ElMessage.error('添加失败')
+    }
   })
 }
-const reset=()=>{
-  location.reload()
+const reset = () => {
+  addition.value.employeeName = ''
+  addition.value.employeeGender = ''
+  addition.value.employeeAge = ''
+  addition.value.employeePhone = ''
+  addition.value.employeeAddress = ''
+  addition.value.employeeDepartment = ''
+  addition.value.employeePosition = ''
+  addition.value.employeeSalary = ''
+  addition.value.employeeDormitory = ''
 }
-onMounted(()=>{
-  getting()
+onMounted(() => {
+  getCount()
 })
 
 
 </script>
 
 <template>
-  <div style="margin-left: 8%">
+  <div class="entry">
     <h3>个人信息</h3>
-    <el-card class="card identity" shadow="hover">
+    <el-card class="card " shadow="hover">
       <el-form :model="addition" label-width="60px" label-position="left">
         <el-form-item label="姓名">
           <el-input v-model="addition.employeeName" placeholder="请输入姓名"></el-input>
@@ -99,7 +83,7 @@ onMounted(()=>{
     </el-card>
 
     <h3>员工信息</h3>
-    <el-card class="card identity" shadow="hover">
+    <el-card class="card " shadow="hover">
       <el-form :model="addition" label-width="80px">
         <el-form-item label="员工号">
           <el-input v-model="addition.employeeID" placeholder="请输入员工号" disabled></el-input>
@@ -112,16 +96,20 @@ onMounted(()=>{
         </el-form-item>
       </el-form>
     </el-card>
-    <el-button type="primary"  @click="submit">提交</el-button>
-    <el-button type="primary"  @click="reset">重置</el-button>
+    <div>
+      <el-button type="primary" @click="submit">提交</el-button>
+      <el-button type="primary" @click="reset">重置</el-button>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .card {
   margin-bottom: 20px;
-  width: 90%;
+  width: 80%;
   border-radius: 10px;
+  border: 1px solid #3498db;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
 h3 {
@@ -129,10 +117,7 @@ h3 {
   margin: 20px 0;
 }
 
-.identity {
-  border: 1px solid #3498db;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-}
+
 
 :deep(.el-form-item__label ) {
   color: #4db04a;
@@ -147,6 +132,13 @@ h3 {
   background-color: #ecf0f1;
   border-color: #d72a06;
   color: #2c3e50;
+}
+
+.entry{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
 
 </style>

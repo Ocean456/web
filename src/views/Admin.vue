@@ -113,7 +113,11 @@ const handleLogout = () => {
           </el-menu>
         </el-header>
         <el-main>
-          <RouterView/>
+          <router-view v-slot="{ Component }">
+            <transition name="fade" mode="out-in">
+              <component :is="Component"/>
+            </transition>
+          </router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -187,5 +191,13 @@ const handleLogout = () => {
 
 :deep(.el-sub-menu .el-menu-item:hover) {
   background-color: #02172a;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+
+.fade-enter , .fade-leave-to {
+  opacity: 0;
 }
 </style>
