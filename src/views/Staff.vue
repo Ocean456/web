@@ -2,7 +2,7 @@
 import {ref} from "vue";
 import StaffInfo from "../components/staff/Info.vue";
 import Setting from "../components/staff/Setting.vue";
-// import Check from "../components/staff/Check.vue";
+import Check from "../components/staff/Check.vue";
 import DormChange from "../components/staff/DormChange.vue";
 
 
@@ -21,9 +21,9 @@ const display = ref('staff')
         <el-tab-pane label="宿舍更换" name="dorm" lazy>
           <DormChange/>
         </el-tab-pane>
-<!--        <el-tab-pane label="考勤签到" name="check" lazy>
+        <el-tab-pane label="考勤签到" name="check" lazy>
           <Check/>
-        </el-tab-pane>-->
+        </el-tab-pane>
         <el-tab-pane label="系统设置" name="setting" lazy>
           <Setting/>
         </el-tab-pane>

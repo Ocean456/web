@@ -50,10 +50,7 @@ const handleClose = () => {
       <el-descriptions-item label="底薪">{{ props.employee.employeeSalary }}</el-descriptions-item>
       <el-descriptions-item label="入职日期">{{ props.employee.employeeHireDate }}</el-descriptions-item>
       <el-descriptions-item label="离职日期">{{ props.employee.employeeResignationDate }}</el-descriptions-item>
-      <el-descriptions-item label="紧急联系电话">{{
-          props.employee.employeeEmergencyContactPhone
-        }}
-      </el-descriptions-item>
+      <el-descriptions-item label="紧急联系电话">{{props.employee.employeeEmergencyContactPhone }}</el-descriptions-item>
       <el-descriptions-item label="宿舍号">{{ props.employee.employeeDormitory }}</el-descriptions-item>
     </el-descriptions>
   </el-dialog>

@@ -39,7 +39,7 @@ const update = () => {
       type: 'warning'
     })
 
-})
+})}
 
 const inputWidth = computed(() => {
   if (parameter.value.length === 0) {

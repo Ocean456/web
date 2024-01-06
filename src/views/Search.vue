@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {ref} from "vue";
-import {getEmployee} from "../axios";
+import {onMounted, ref} from "vue";
+import {getEmployee, getEmployees} from "../axios";
 import EmployeeTable from "../components/EmployeeTable.vue";
 
 const select = ref("employeeName");
@@ -30,6 +30,15 @@ const handleCurrentChange = (val: number) => {
   currentPage.value = val;
   fetchData();
 };
+
+onMounted(() => {
+  getEmployees().then((res: any) => {
+    totalData.value = res.data;
+    tableData.value = totalData.value;
+    handleCurrentChange(1);
+    total.value = res.data.length;
+  });
+});
 </script>
 
 <template>

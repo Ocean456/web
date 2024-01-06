@@ -17,7 +17,6 @@ const config = reactive({
         </transition>
       </router-view>
     </el-config-provider>
-
   </div>
 </template>
 <style scoped>

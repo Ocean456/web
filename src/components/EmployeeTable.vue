@@ -59,11 +59,11 @@ const openDialog = (row: any) => {
         <el-button type="primary" size="small" @click="openDialog(row)">查看</el-button>
       </template>
     </el-table-column>
-    <!--    <el-table-column prop="salary" label="员工薪水"></el-table-column>-->
-    <!--    <el-table-column prop="hireDate" label="入职日期"></el-table-column>-->
-    <!--    <el-table-column prop="resignationDate" label="离职日期"></el-table-column>-->
-    <!--    <el-table-column prop="emergencyContactPhone" label="紧急联系电话"></el-table-column>-->
-    <!--    <el-table-column prop="dormitory" label="宿舍"></el-table-column>-->
+<!--        <el-table-column prop="salary" label="员工薪水"></el-table-column>
+        <el-table-column prop="hireDate" label="入职日期"></el-table-column>
+        <el-table-column prop="resignationDate" label="离职日期"></el-table-column>
+        <el-table-column prop="emergencyContactPhone" label="紧急联系电话"></el-table-column>
+        <el-table-column prop="dormitory" label="宿舍"></el-table-column>-->
   </el-table>
   <EmployeeDialog :employee="selectedEmployee" :visible="dialogVisible"
                   @update:visible="dialogVisible = $event"></EmployeeDialog>

@@ -52,6 +52,9 @@ onMounted(() => {
 </script>
 <template>
   <el-container>
+    <div style="width: 50%;float: left;text-align: center;color: white" >
+      <h1>员工信息管理系统</h1>
+    </div>
     <el-card :style="{width:cardWidth}">
       <el-form>
         <el-header>

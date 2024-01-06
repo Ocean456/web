@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import {getEmployee} from "../axios";
+import {getEmployee, getEmployees} from "../axios";
 import ModifyTable from "../components/ModifyTable.vue";
 
 const presentData = ref([]);
@@ -30,10 +30,12 @@ const handleCurrentChange = (val: number) => {
 };
 
 onMounted(() => {
-  /*  getEmployees().then((res) => {
+    getEmployees().then((res) => {
       totalData.value = res.data;
       presentData.value = totalData.value;
-    })*/
+      handleCurrentChange(1)
+      total.value = res.data.length;
+    })
 })
 </script>
 
@@ -59,5 +61,6 @@ onMounted(() => {
   margin-top: 15px;
   justify-content: center;
 }
+
 
 </style>

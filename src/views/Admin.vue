@@ -25,12 +25,12 @@ const handleLogout = () => {
 
             员工信息管理系统
           </el-card>
-          <el-menu-item index="/admin/home">
+<!--          <el-menu-item index="/admin/home">
             <el-icon>
               <Compass/>
             </el-icon>
             系统首页
-          </el-menu-item>
+          </el-menu-item>-->
           <el-sub-menu index="1">
             <template #title>
               <el-icon>
