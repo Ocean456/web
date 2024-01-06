@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 
-
 axios.defaults.baseURL = 'http://localhost:9090/api'
 
 
@@ -60,7 +59,7 @@ export const setDimission = (employee: any) => {
 export const updateEmployee = (employee: any) => {
     return axios.put('/employee', employee)
 }
-export const deleteTraining = ( trainingId: number) => {
+export const deleteTraining = (trainingId: number) => {
     return axios.delete('/training', {
         params: {
             trainingId: trainingId
@@ -73,7 +72,7 @@ export const addTraining = (training: any) => {
 }
 
 
-export const  getAttendanceByEmployeeId = (employeeId: number) => {
+export const getAttendanceByEmployeeId = (employeeId: number) => {
     return axios.get('/attendance', {
         params: {
             employeeId: employeeId
@@ -93,35 +92,51 @@ export const updateAttendanceConfig = (config: any) => {
     return axios.put('/config/attendance', config)
 }
 
-export const get_salary=(id:number,month:string)=>{
-    return axios.get('/search',{
-        params:{
-            id:id,
-            month:month
+export const get_salary = (id: number, month: string) => {
+    return axios.get('/search', {
+        params: {
+            id: id,
+            month: month
         }
     })
 }
-export const get_salary1=(id:number)=>{
-    return axios.get('/search1',{
-        params:{
-            id:id
+export const get_salary1 = (id: number) => {
+    return axios.get('/search1', {
+        params: {
+            id: id
         }
     })
 }
-export const get_salary2=(month:string)=>{
-    return axios.get('/search2',{
-        params:{
-            month:month
+export const get_salary2 = (month: string) => {
+    return axios.get('/search2', {
+        params: {
+            month: month
         }
     })
 }
 
-export const deleteApplication=(applicationId:number)=>{
-    return axios.delete('/application',{
+export const deleteApplication = (applicationId: number) => {
+    return axios.delete('/application', {
         params: {
             applicationId: applicationId
         }
     })
 }
 
+
+export const setAttendance = (employeePhone: string) => {
+    return axios.get('/attendance/set', {
+        params: {
+            employeePhone: employeePhone
+        }
+    })
+}
+
+export const getTraining = (triningName:string) => {
+    return axios.get('/training', {
+        params: {
+            trainingName: triningName
+        }
+    })
+}
 export default axios

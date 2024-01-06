@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TrainingTable from "../components/TrainingTable.vue";
 import {onMounted, ref} from "vue";
-import {getTrainings, addTraining} from "../axios";
+import {getTrainings, addTraining, getTraining} from "../axios";
 import {ElMessage} from "element-plus";
 
 const tableData = ref([])
@@ -36,10 +36,24 @@ const submit = () => {
     ElMessage.error('添加失败')
   })
 }
+const trainingName = ref('')
+
+const search = () => {
+  getTraining(trainingName.value).then((res: any) => {
+    tableData.value = res.data
+  })
+}
+
 </script>
 
 <template>
   <div class="training">
+    <el-input @keydown.enter="search" v-model="trainingName" placeholder="请输入培训名称">
+      <template #append>
+        <el-button @click="search">搜索</el-button>
+      </template>
+    </el-input>
+
     <el-button @click="add" class="button">添加培训</el-button>
     <TrainingTable :tableData="tableData"/>
     <el-dialog title="添加培训" v-model="dialogVisible">
